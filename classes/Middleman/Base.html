@@ -109,7 +109,18 @@
         <dd>
             <ul>
                 
+                <li><a href="#M000027">recurse_sitemap</a>,</li>
+                
                 <li><a href="#M000003">run!</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000028">sitemap_node</a></li>
                 
             </ul>
         </dd>
@@ -416,16 +427,16 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
                     <p class="source-link">
                         Source: <a href="javascript:toggleSource('M000026_source')" id="l_M000026_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/b35f026aba421f11994f091abcf92ef058f31ca1/lib/middleman/features/slickmap.rb#L4" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/332a0be7372975588befdf871e02f86a58326ae2/lib/middleman/features/slickmap.rb#L11" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
                     <div id="M000026_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 4</span>
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 11</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_sitemap</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-    <span class="ruby-comment cmt"># views - stylesheets</span>
-    <span class="ruby-comment cmt"># public</span>
-    <span class="ruby-comment cmt"># .select</span>
-    <span class="ruby-comment cmt">#   block.call(this)</span>
+    <span class="ruby-identifier">html_files</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">views</span>), <span class="ruby-value str">&quot;**&quot;</span>, <span class="ruby-value str">&quot;*.html*&quot;</span>)]
+    
+    <span class="ruby-ivar">@@utility</span> = []
+    [<span class="ruby-identifier">recurse_sitemap</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">views</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>), <span class="ruby-ivar">@@utility</span>]
   <span class="ruby-keyword kw">end</span></pre>
                     </div>
                 </div>
@@ -447,6 +458,109 @@ Alias for <a href="Base.html#M000006">asset_url</a>
                 </div>
                 
                 
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000027">
+                    
+                    <a name="M000027"></a><b>recurse_sitemap</b>(path, &amp;block)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000027_source')" id="l_M000027_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/332a0be7372975588befdf871e02f86a58326ae2/lib/middleman/features/slickmap.rb#L18" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000027_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 18</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">recurse_sitemap</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">bad_ext</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.html'</span>)[<span class="ruby-value">1</span>]
+    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">bad_ext</span>, <span class="ruby-value str">''</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bad_ext</span>
+    <span class="ruby-identifier">entry</span> = <span class="ruby-constant">Entry</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>, [])
+
+    <span class="ruby-comment cmt">#no &quot;.&quot; or &quot;..&quot; dirs</span>
+    <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value str">&quot;*&quot;</span>)].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">e</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">e</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value str">&quot;.html&quot;</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">e</span>)
+        <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">children</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">recurse_sitemap</span>(<span class="ruby-identifier">e</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">block_given?</span>
+        <span class="ruby-identifier">how_to_handle</span> = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">e</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">how_to_handle</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:valid</span>
+          <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">children</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">recurse_sitemap</span>(<span class="ruby-identifier">e</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">how_to_handle</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:utility</span>
+          <span class="ruby-identifier">bad_ext</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.html'</span>)[<span class="ruby-value">1</span>]
+          <span class="ruby-identifier">e</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">bad_ext</span>, <span class="ruby-value str">''</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bad_ext</span>
+          <span class="ruby-ivar">@@utility</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">views</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;/&quot;</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">entry</span>
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000028">
+                    
+                    <a name="M000028"></a><b>sitemap_node</b>(n, first=false)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000028_source')" id="l_M000028_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/332a0be7372975588befdf871e02f86a58326ae2/lib/middleman/features/slickmap.rb#L44" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000028_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 44</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sitemap_node</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">first</span>=<span class="ruby-keyword kw">false</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">first</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">n</span>.<span class="ruby-identifier">dir</span>).<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+          <span class="ruby-identifier">haml_tag</span> <span class="ruby-identifier">:li</span> <span class="ruby-keyword kw">do</span>
+            <span class="ruby-identifier">path</span> = <span class="ruby-identifier">n</span>.<span class="ruby-identifier">dir</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">views</span>, <span class="ruby-value str">''</span>)
+            <span class="ruby-identifier">haml_concat</span> <span class="ruby-identifier">link_to</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>), <span class="ruby-identifier">path</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>  
+        <span class="ruby-identifier">haml_tag</span>(<span class="ruby-identifier">:li</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">first</span> <span class="ruby-value">? </span><span class="ruby-value str">&quot;home&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">first</span>
+            <span class="ruby-identifier">haml_concat</span> <span class="ruby-identifier">link_to</span>(<span class="ruby-value str">&quot;Homepage&quot;</span>, <span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">index_file</span>)
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-comment cmt"># we are a dir</span>
+            <span class="ruby-identifier">index</span> = <span class="ruby-identifier">n</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">dir</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">index_file</span>) }
+            <span class="ruby-identifier">haml_concat</span> <span class="ruby-identifier">link_to</span>(<span class="ruby-identifier">index</span>.<span class="ruby-identifier">dir</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">views</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;/&quot;</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">index</span>.<span class="ruby-identifier">dir</span>), <span class="ruby-value str">''</span>).<span class="ruby-identifier">capitalize</span>, <span class="ruby-identifier">index</span>.<span class="ruby-identifier">dir</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">views</span>, <span class="ruby-value str">''</span>))
+          <span class="ruby-keyword kw">end</span>
+      
+          <span class="ruby-identifier">other_children</span> = <span class="ruby-identifier">n</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">c</span>.<span class="ruby-identifier">dir</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">index_file</span>) }
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">other_children</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">first</span>
+              <span class="ruby-identifier">other_children</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sitemap_node</span>(<span class="ruby-identifier">i</span>) }
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-identifier">haml_tag</span> <span class="ruby-identifier">:ul</span> <span class="ruby-keyword kw">do</span>
+                <span class="ruby-identifier">other_children</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sitemap_node</span>(<span class="ruby-identifier">i</span>) }
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>  
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
                 
             </div>
             

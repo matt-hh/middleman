@@ -96,6 +96,15 @@
             </ul>
         </dd>
     
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000000">mime</a></li>
+                
+            </ul>
+        </dd>
+    
         <dt>P</dt>
         <dd>
             <ul>
@@ -239,7 +248,7 @@ Require the features for this project
                     <p class="source-link">
                         Source: <a href="javascript:toggleSource('M000004_source')" id="l_M000004_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/d40111d67ec90073ff063c1ec27596c29c80b5f4/lib/middleman/base.rb#L116" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/base.rb#L116" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
                     <div id="M000004_source" class="dyn-source">
@@ -296,7 +305,7 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
                     <p class="source-link">
                         Source: <a href="javascript:toggleSource('M000003_source')" id="l_M000003_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/d40111d67ec90073ff063c1ec27596c29c80b5f4/lib/middleman/base.rb#L92" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/base.rb#L92" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
                     <div id="M000003_source" class="dyn-source">
@@ -438,6 +447,41 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
     <span class="ruby-ivar">@@utility</span> = []
     [<span class="ruby-identifier">recurse_sitemap</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">views</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>), <span class="ruby-ivar">@@utility</span>]
   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000000">
+                    
+                    <a name="M000000"></a><b>mime</b>(ext, type)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Rack helper for adding mime-types during local preview
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000000_source')" id="l_M000000_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/base.rb#L43" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000000_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/base.rb, line 43</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mime</span>(<span class="ruby-identifier">ext</span>, <span class="ruby-identifier">type</span>)
+      <span class="ruby-identifier">ext</span> = <span class="ruby-node">&quot;.#{ext}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">?.</span>
+      <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">MIME_TYPES</span>[<span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-identifier">type</span>
+    <span class="ruby-keyword kw">end</span></pre>
                     </div>
                 </div>
                 
@@ -586,7 +630,7 @@ renderer (haml, sass, etc)
                     <p class="source-link">
                         Source: <a href="javascript:toggleSource('M000001_source')" id="l_M000001_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/d40111d67ec90073ff063c1ec27596c29c80b5f4/lib/middleman/base.rb#L49" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/base.rb#L49" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
                     <div id="M000001_source" class="dyn-source">

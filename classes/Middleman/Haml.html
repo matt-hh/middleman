@@ -36,28 +36,22 @@
 
     
     
-    <div class="sectiontitle">Methods</div>
-    <dl class="methods">
+
     
-        <dt>I</dt>
-        <dd>
-            <ul>
-                
-                <li><a href="#M000008">included</a></li>
-                
-            </ul>
-        </dd>
+
     
-        <dt>R</dt>
-        <dd>
-            <ul>
-                
-                <li><a href="#M000009">render_path</a></li>
-                
-            </ul>
-        </dd>
+
     
-    </dl>
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Haml/Helpers.html">Middleman::Haml::Helpers</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="Haml/Renderer.html">Middleman::Haml::Renderer</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="Haml/Table.html">Middleman::Haml::Table</a></li>
+        
+    </ul>
     
 
     
@@ -65,82 +59,6 @@
     
 
     
-
-    
-
-    
-
-    
-            <div class="sectiontitle">Class Public methods</div>
-            
-            <div class="method">
-                <div class="title" id="M000008">
-                    
-                    <a name="M000008"></a><b>included</b>(base)
-                    
-                </div>
-                
-                
-                
-                
-                <div class="sourcecode">
-                    <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000008_source')" id="l_M000008_source">show</a>
-                        
-                        | <a href="http://github.com/tdreyno/middleman/blob/d40111d67ec90073ff063c1ec27596c29c80b5f4/lib/middleman/features/haml.rb#L5" target="_blank" class="github_url">on GitHub</a>
-                        
-                    </p>
-                    <div id="M000008_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/haml.rb, line 5</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
-      <span class="ruby-identifier">base</span>.<span class="ruby-identifier">supported_formats</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;haml&quot;</span>
-      <span class="ruby-identifier">base</span>.<span class="ruby-identifier">helpers</span> <span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">HamlHelpers</span>
-    <span class="ruby-keyword kw">end</span></pre>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="sectiontitle">Instance Public methods</div>
-            
-            <div class="method">
-                <div class="title" id="M000009">
-                    
-                    <a name="M000009"></a><b>render_path</b>(path)
-                    
-                </div>
-                
-                
-                
-                
-                <div class="sourcecode">
-                    <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000009_source')" id="l_M000009_source">show</a>
-                        
-                        | <a href="http://github.com/tdreyno/middleman/blob/d40111d67ec90073ff063c1ec27596c29c80b5f4/lib/middleman/features/haml.rb#L10" target="_blank" class="github_url">on GitHub</a>
-                        
-                    </p>
-                    <div id="M000009_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/haml.rb, line 10</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_path</span>(<span class="ruby-identifier">path</span>)
-      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">template_exists?</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">:haml</span>)
-        <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">nil</span>
-        <span class="ruby-keyword kw">begin</span>
-          <span class="ruby-identifier">result</span> = <span class="ruby-identifier">haml</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;.xml&quot;</span>)
-        <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Haml</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
-          <span class="ruby-identifier">result</span> = <span class="ruby-node">&quot;Haml Error: #{e}&quot;</span>
-          <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;pre&gt;Backtrace: #{e.backtrace.join(&quot;\n&quot;)}&lt;/pre&gt;&quot;</span>
-        <span class="ruby-keyword kw">end</span>
-        <span class="ruby-identifier">result</span>
-      <span class="ruby-keyword kw">else</span>
-        <span class="ruby-keyword kw">super</span>
-      <span class="ruby-keyword kw">end</span>
-    <span class="ruby-keyword kw">end</span></pre>
-                    </div>
-                </div>
-                
-            </div>
-            
 </div>
     </div>
   </body>

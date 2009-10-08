@@ -43,7 +43,7 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000018">included</a></li>
+                <li><a href="#M000015">included</a></li>
                 
             </ul>
         </dd>
@@ -52,7 +52,7 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000019">render_path</a></li>
+                <li><a href="#M000016">render_path</a></li>
                 
             </ul>
         </dd>
@@ -61,7 +61,7 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000020">sass_exception_string</a></li>
+                <li><a href="#M000017">sass_exception_string</a></li>
                 
             </ul>
         </dd>
@@ -83,9 +83,9 @@
             <div class="sectiontitle">Class Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000018">
+                <div class="title" id="M000015">
                     
-                    <a name="M000018"></a><b>included</b>(base)
+                    <a name="M000015"></a><b>included</b>(base)
                     
                 </div>
                 
@@ -94,12 +94,12 @@
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000018_source')" id="l_M000018_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000015_source')" id="l_M000015_source">show</a>
                         
                         | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/features/haml.rb#L67" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000018_source" class="dyn-source">
+                    <div id="M000015_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/features/haml.rb, line 67</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">supported_formats</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;sass&quot;</span>
@@ -112,9 +112,9 @@
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000019">
+                <div class="title" id="M000016">
                     
-                    <a name="M000019"></a><b>render_path</b>(path)
+                    <a name="M000016"></a><b>render_path</b>(path)
                     
                 </div>
                 
@@ -123,12 +123,12 @@
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000019_source')" id="l_M000019_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000016_source')" id="l_M000016_source">show</a>
                         
                         | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/features/haml.rb#L71" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000019_source" class="dyn-source">
+                    <div id="M000016_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/features/haml.rb, line 71</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_path</span>(<span class="ruby-identifier">path</span>)
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">template_exists?</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">:sass</span>)
@@ -152,9 +152,9 @@
             </div>
             
             <div class="method">
-                <div class="title" id="M000020">
+                <div class="title" id="M000017">
                     
-                    <a name="M000020"></a><b>sass_exception_string</b>(e)
+                    <a name="M000017"></a><b>sass_exception_string</b>(e)
                     
                 </div>
                 
@@ -170,12 +170,12 @@ Handle <a href="Sass.html">Sass</a> errors
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000020_source')" id="l_M000020_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000017_source')" id="l_M000017_source">show</a>
                         
                         | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/features/haml.rb#L89" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000020_source" class="dyn-source">
+                    <div id="M000017_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/features/haml.rb, line 89</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sass_exception_string</span>(<span class="ruby-identifier">e</span>)
       <span class="ruby-identifier">e_string</span> = <span class="ruby-node">&quot;#{e.class}: #{e.message}&quot;</span>

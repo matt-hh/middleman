@@ -43,7 +43,7 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000015">included</a></li>
+                <li><a href="#M000021">included</a></li>
                 
             </ul>
         </dd>
@@ -52,7 +52,7 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000017">markaby</a></li>
+                <li><a href="#M000023">markaby</a></li>
                 
             </ul>
         </dd>
@@ -61,9 +61,9 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000018">render_mab</a>,</li>
+                <li><a href="#M000024">render_mab</a>,</li>
                 
-                <li><a href="#M000016">render_path</a></li>
+                <li><a href="#M000022">render_path</a></li>
                 
             </ul>
         </dd>
@@ -85,9 +85,9 @@
             <div class="sectiontitle">Class Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000015">
+                <div class="title" id="M000021">
                     
-                    <a name="M000015"></a><b>included</b>(base)
+                    <a name="M000021"></a><b>included</b>(base)
                     
                 </div>
                 
@@ -96,12 +96,12 @@
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000015_source')" id="l_M000015_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000021_source')" id="l_M000021_source">show</a>
                         
                         | <a href="http://github.com/tdreyno/middleman/blob/1a975efa61e07d97decce1c68153af37232fb456/lib/middleman/features/markaby.rb#L9" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000015_source" class="dyn-source">
+                    <div id="M000021_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/features/markaby.rb, line 9</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">supported_formats</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;mab&quot;</span>
@@ -114,9 +114,9 @@
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000017">
+                <div class="title" id="M000023">
                     
-                    <a name="M000017"></a><b>markaby</b>(template=nil, options={}, locals = {}, &amp;block)
+                    <a name="M000023"></a><b>markaby</b>(template=nil, options={}, locals = {}, &amp;block)
                     
                 </div>
                 
@@ -125,12 +125,12 @@
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000017_source')" id="l_M000017_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000023_source')" id="l_M000023_source">show</a>
                         
                         | <a href="http://github.com/tdreyno/middleman/blob/1a975efa61e07d97decce1c68153af37232fb456/lib/middleman/features/markaby.rb#L21" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000017_source" class="dyn-source">
+                    <div id="M000023_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/features/markaby.rb, line 21</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">markaby</span>(<span class="ruby-identifier">template</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">options</span>={}, <span class="ruby-identifier">locals</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
       <span class="ruby-identifier">options</span>, <span class="ruby-identifier">template</span> = <span class="ruby-identifier">template</span>, <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
@@ -143,9 +143,9 @@
             </div>
             
             <div class="method">
-                <div class="title" id="M000016">
+                <div class="title" id="M000022">
                     
-                    <a name="M000016"></a><b>render_path</b>(path)
+                    <a name="M000022"></a><b>render_path</b>(path)
                     
                 </div>
                 
@@ -154,12 +154,12 @@
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000016_source')" id="l_M000016_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000022_source')" id="l_M000022_source">show</a>
                         
                         | <a href="http://github.com/tdreyno/middleman/blob/1a975efa61e07d97decce1c68153af37232fb456/lib/middleman/features/markaby.rb#L13" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000016_source" class="dyn-source">
+                    <div id="M000022_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/features/markaby.rb, line 13</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_path</span>(<span class="ruby-identifier">path</span>)
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">template_exists?</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">:mab</span>)
@@ -176,9 +176,9 @@
             <div class="sectiontitle">Instance Protected methods</div>
             
             <div class="method">
-                <div class="title" id="M000018">
+                <div class="title" id="M000024">
                     
-                    <a name="M000018"></a><b>render_mab</b>(template, data, options, locals, &amp;block)
+                    <a name="M000024"></a><b>render_mab</b>(template, data, options, locals, &amp;block)
                     
                 </div>
                 
@@ -187,12 +187,12 @@
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000018_source')" id="l_M000018_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000024_source')" id="l_M000024_source">show</a>
                         
                         | <a href="http://github.com/tdreyno/middleman/blob/1a975efa61e07d97decce1c68153af37232fb456/lib/middleman/features/markaby.rb#L28" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000018_source" class="dyn-source">
+                    <div id="M000024_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/features/markaby.rb, line 28</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_mab</span>(<span class="ruby-identifier">template</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">locals</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
       <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:filename</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">'&lt;MARKABY&gt;'</span>

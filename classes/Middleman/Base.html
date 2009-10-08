@@ -71,9 +71,9 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000006">asset_url</a>,</li>
+                <li><a href="#M000012">asset_url</a>,</li>
                 
-                <li><a href="#M000025">asset_url</a></li>
+                <li><a href="#M000031">asset_url</a></li>
                 
             </ul>
         </dd>
@@ -82,7 +82,7 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000026">build_sitemap</a></li>
+                <li><a href="#M000032">build_sitemap</a></li>
                 
             </ul>
         </dd>
@@ -109,7 +109,7 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000007">pre_cache_buster_asset_url</a></li>
+                <li><a href="#M000013">pre_cache_buster_asset_url</a></li>
                 
             </ul>
         </dd>
@@ -118,7 +118,7 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000027">recurse_sitemap</a>,</li>
+                <li><a href="#M000033">recurse_sitemap</a>,</li>
                 
                 <li><a href="#M000003">run!</a></li>
                 
@@ -129,7 +129,7 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000028">sitemap_node</a></li>
+                <li><a href="#M000034">sitemap_node</a></li>
                 
             </ul>
         </dd>
@@ -230,7 +230,7 @@
             <div class="method">
                 <div class="title" id="M000004">
                     
-                    <a name="M000004"></a><b>init!</b>()
+                    <a name="M000004"></a><b>init!</b>(quiet=false)
                     
                 </div>
                 
@@ -248,12 +248,12 @@ Require the features for this project
                     <p class="source-link">
                         Source: <a href="javascript:toggleSource('M000004_source')" id="l_M000004_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/base.rb#L116" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/base.rb#L120" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
                     <div id="M000004_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/base.rb, line 116</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">init!</span>
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/base.rb, line 120</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">init!</span>(<span class="ruby-identifier">quiet</span>=<span class="ruby-keyword kw">false</span>)
       <span class="ruby-comment cmt"># Built-in helpers</span>
       <span class="ruby-identifier">require</span> <span class="ruby-value str">'middleman/helpers'</span>
       <span class="ruby-identifier">helpers</span> <span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Helpers</span>
@@ -264,7 +264,7 @@ Require the features for this project
       <span class="ruby-comment cmt"># Check for and evaluate local configuration</span>
       <span class="ruby-identifier">local_config</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">root</span>, <span class="ruby-value str">&quot;init.rb&quot;</span>)
       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span> <span class="ruby-identifier">local_config</span>
-        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;== Local config at: #{local_config}&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;== Local config at: #{local_config}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet</span>
         <span class="ruby-identifier">class_eval</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">local_config</span>)
       <span class="ruby-keyword kw">end</span>
       
@@ -277,6 +277,41 @@ Require the features for this project
           <span class="ruby-identifier">require</span> <span class="ruby-node">&quot;middleman/features/#{feature_name}&quot;</span>
         <span class="ruby-keyword kw">end</span>
       <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000000">
+                    
+                    <a name="M000000"></a><b>mime</b>(ext, type)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Rack helper for adding mime-types during local preview
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000000_source')" id="l_M000000_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/base.rb#L43" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000000_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/base.rb, line 43</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mime</span>(<span class="ruby-identifier">ext</span>, <span class="ruby-identifier">type</span>)
+      <span class="ruby-identifier">ext</span> = <span class="ruby-node">&quot;.#{ext}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">?.</span>
+      <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">MIME_TYPES</span>[<span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-identifier">type</span>
     <span class="ruby-keyword kw">end</span></pre>
                     </div>
                 </div>
@@ -305,11 +340,11 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
                     <p class="source-link">
                         Source: <a href="javascript:toggleSource('M000003_source')" id="l_M000003_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/base.rb#L92" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/base.rb#L96" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
                     <div id="M000003_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/base.rb, line 92</span>
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/base.rb, line 96</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">run!</span>(<span class="ruby-identifier">options</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
       <span class="ruby-identifier">init!</span>
       <span class="ruby-identifier">set</span> <span class="ruby-identifier">options</span>
@@ -340,9 +375,9 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000006">
+                <div class="title" id="M000012">
                     
-                    <a name="M000006"></a><b>asset_url</b>(path, prefix=&quot;&quot;)
+                    <a name="M000012"></a><b>asset_url</b>(path, prefix=&quot;&quot;)
                     
                 </div>
                 
@@ -350,7 +385,7 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
                 <div class="aka">
                     This method is also aliased as
                     
-                    <a href="Base.html#M000007">pre_cache_buster_asset_url</a>
+                    <a href="Base.html#M000013">pre_cache_buster_asset_url</a>
                     
                 </div>
                 
@@ -358,12 +393,12 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000006_source')" id="l_M000006_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000012_source')" id="l_M000012_source">show</a>
                         
                         | <a href="http://github.com/tdreyno/middleman/blob/d40111d67ec90073ff063c1ec27596c29c80b5f4/lib/middleman/features/cache_buster.rb#L4" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000006_source" class="dyn-source">
+                    <div id="M000012_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/features/cache_buster.rb, line 4</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">asset_url</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">prefix</span>=<span class="ruby-value str">&quot;&quot;</span>)
       <span class="ruby-identifier">http_path</span> = <span class="ruby-identifier">pre_cache_buster_asset_url</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">prefix</span>)
@@ -381,9 +416,9 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
             </div>
             
             <div class="method">
-                <div class="title" id="M000025">
+                <div class="title" id="M000031">
                     
-                    <a name="M000025"></a><b>asset_url</b>(path, prefix=&quot;&quot;)
+                    <a name="M000031"></a><b>asset_url</b>(path, prefix=&quot;&quot;)
                     
                 </div>
                 
@@ -392,12 +427,12 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000025_source')" id="l_M000025_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000031_source')" id="l_M000031_source">show</a>
                         
                         | <a href="http://github.com/tdreyno/middleman/blob/dbe067ee15e4ee9a0025aef5d459a2265b8bbdf8/lib/middleman/features/relative_assets.rb#L12" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000025_source" class="dyn-source">
+                    <div id="M000031_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/features/relative_assets.rb, line 12</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">asset_url</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">prefix</span>=<span class="ruby-value str">&quot;&quot;</span>)
       <span class="ruby-identifier">path</span> = <span class="ruby-identifier">pre_relative_asset_url</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">prefix</span>)
@@ -423,9 +458,9 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
             </div>
             
             <div class="method">
-                <div class="title" id="M000026">
+                <div class="title" id="M000032">
                     
-                    <a name="M000026"></a><b>build_sitemap</b>(&amp;block)
+                    <a name="M000032"></a><b>build_sitemap</b>(&amp;block)
                     
                 </div>
                 
@@ -434,16 +469,14 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000026_source')" id="l_M000026_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000032_source')" id="l_M000032_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/332a0be7372975588befdf871e02f86a58326ae2/lib/middleman/features/slickmap.rb#L11" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/features/slickmap.rb#L15" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000026_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 11</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_sitemap</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-    <span class="ruby-identifier">html_files</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">views</span>), <span class="ruby-value str">&quot;**&quot;</span>, <span class="ruby-value str">&quot;*.html*&quot;</span>)]
-    
+                    <div id="M000032_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 15</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_sitemap</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)    
     <span class="ruby-ivar">@@utility</span> = []
     [<span class="ruby-identifier">recurse_sitemap</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">views</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>), <span class="ruby-ivar">@@utility</span>]
   <span class="ruby-keyword kw">end</span></pre>
@@ -453,50 +486,15 @@ changed the app&#8217;s name and call out feature &amp; configuration init.
             </div>
             
             <div class="method">
-                <div class="title" id="M000000">
+                <div class="title" id="M000013">
                     
-                    <a name="M000000"></a><b>mime</b>(ext, type)
-                    
-                </div>
-                
-                <div class="description">
-                  <p>
-Rack helper for adding mime-types during local preview
-</p>
-
-                </div>
-                
-                
-                
-                
-                <div class="sourcecode">
-                    <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000000_source')" id="l_M000000_source">show</a>
-                        
-                        | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/base.rb#L43" target="_blank" class="github_url">on GitHub</a>
-                        
-                    </p>
-                    <div id="M000000_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/base.rb, line 43</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mime</span>(<span class="ruby-identifier">ext</span>, <span class="ruby-identifier">type</span>)
-      <span class="ruby-identifier">ext</span> = <span class="ruby-node">&quot;.#{ext}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">?.</span>
-      <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">MIME_TYPES</span>[<span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-identifier">type</span>
-    <span class="ruby-keyword kw">end</span></pre>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="method">
-                <div class="title" id="M000007">
-                    
-                    <a name="M000007"></a><b>pre_cache_buster_asset_url</b>(path, prefix=&quot;&quot;)
+                    <a name="M000013"></a><b>pre_cache_buster_asset_url</b>(path, prefix=&quot;&quot;)
                     
                 </div>
                 
                 <div class="description">
                   <p>
-Alias for <a href="Base.html#M000006">asset_url</a>
+Alias for <a href="Base.html#M000012">asset_url</a>
 </p>
 
                 </div>
@@ -506,9 +504,9 @@ Alias for <a href="Base.html#M000006">asset_url</a>
             </div>
             
             <div class="method">
-                <div class="title" id="M000027">
+                <div class="title" id="M000033">
                     
-                    <a name="M000027"></a><b>recurse_sitemap</b>(path, &amp;block)
+                    <a name="M000033"></a><b>recurse_sitemap</b>(path, &amp;block)
                     
                 </div>
                 
@@ -517,13 +515,13 @@ Alias for <a href="Base.html#M000006">asset_url</a>
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000027_source')" id="l_M000027_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000033_source')" id="l_M000033_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/332a0be7372975588befdf871e02f86a58326ae2/lib/middleman/features/slickmap.rb#L18" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/features/slickmap.rb#L20" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000027_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 18</span>
+                    <div id="M000033_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 20</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">recurse_sitemap</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
     <span class="ruby-identifier">bad_ext</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.html'</span>)[<span class="ruby-value">1</span>]
     <span class="ruby-identifier">path</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">bad_ext</span>, <span class="ruby-value str">''</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bad_ext</span>
@@ -554,9 +552,9 @@ Alias for <a href="Base.html#M000006">asset_url</a>
             </div>
             
             <div class="method">
-                <div class="title" id="M000028">
+                <div class="title" id="M000034">
                     
-                    <a name="M000028"></a><b>sitemap_node</b>(n, first=false)
+                    <a name="M000034"></a><b>sitemap_node</b>(n, first=false)
                     
                 </div>
                 
@@ -565,13 +563,13 @@ Alias for <a href="Base.html#M000006">asset_url</a>
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000028_source')" id="l_M000028_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000034_source')" id="l_M000034_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/332a0be7372975588befdf871e02f86a58326ae2/lib/middleman/features/slickmap.rb#L44" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/features/slickmap.rb#L46" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000028_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 44</span>
+                    <div id="M000034_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/slickmap.rb, line 46</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sitemap_node</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">first</span>=<span class="ruby-keyword kw">false</span>)
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
         <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">first</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">n</span>.<span class="ruby-identifier">dir</span>).<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
@@ -630,7 +628,7 @@ renderer (haml, sass, etc)
                     <p class="source-link">
                         Source: <a href="javascript:toggleSource('M000001_source')" id="l_M000001_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/8874e976084430c546c5bef742c5550e2aaf042a/lib/middleman/base.rb#L49" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/base.rb#L49" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
                     <div id="M000001_source" class="dyn-source">

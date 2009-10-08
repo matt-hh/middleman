@@ -20,7 +20,7 @@
             
                 <span class="parent">&lt; 
                     
-                    Object
+                    ::Templater::Generator
                     
                 </span>
             
@@ -45,11 +45,38 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
     
-        <dt>R</dt>
+        <dt>D</dt>
         <dd>
             <ul>
                 
-                <li><a href="#M000005">render_file</a></li>
+                <li><a href="#M000006">destination_root</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000008">file</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000005">source_root</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000007">template</a></li>
                 
             </ul>
         </dd>
@@ -71,15 +98,46 @@
             <div class="sectiontitle">Class Public methods</div>
             
             <div class="method">
+                <div class="title" id="M000008">
+                    
+                    <a name="M000008"></a><b>file</b>(name, *args, &amp;block)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000008_source')" id="l_M000008_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/builder.rb#L30" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000008_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/builder.rb, line 30</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">===</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>])
+        <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-node">&quot;#{File.basename(Middleman::Base.views)}/&quot;</span>, <span class="ruby-value str">&quot;&quot;</span>)
+                         .<span class="ruby-identifier">gsub</span>(<span class="ruby-node">&quot;#{File.basename(Middleman::Base.public)}/&quot;</span>, <span class="ruby-value str">&quot;&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
                 <div class="title" id="M000005">
                     
-                    <a name="M000005"></a><b>render_file</b>(source, destination)
+                    <a name="M000005"></a><b>source_root</b>()
                     
                 </div>
                 
                 <div class="description">
                   <p>
-The default render just requests the page over Rack and writes the response
+Define source and desintation
 </p>
 
                 </div>
@@ -91,17 +149,87 @@ The default render just requests the page over Rack and writes the response
                     <p class="source-link">
                         Source: <a href="javascript:toggleSource('M000005_source')" id="l_M000005_source">show</a>
                         
-                        | <a href="http://github.com/tdreyno/middleman/blob/d40111d67ec90073ff063c1ec27596c29c80b5f4/lib/middleman/builder.rb#L8" target="_blank" class="github_url">on GitHub</a>
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/builder.rb#L8" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
                     <div id="M000005_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/middleman/builder.rb, line 8</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">render_file</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">destination</span>)
-      <span class="ruby-identifier">request_path</span> = <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>, <span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">build_dir</span>), <span class="ruby-value str">&quot;&quot;</span>)
-      <span class="ruby-identifier">browser</span> = <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Test</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">MockSession</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>))
-      <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">request_path</span>)
-      <span class="ruby-identifier">browser</span>.<span class="ruby-identifier">last_response</span>.<span class="ruby-identifier">body</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">source_root</span>; <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>; <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000007">
+                    
+                    <a name="M000007"></a><b>template</b>(name, *args, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Override template to ask middleman for the correct extension to output
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000007_source')" id="l_M000007_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/builder.rb#L12" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000007_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/builder.rb, line 12</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">template</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-value str">'layout'</span>)
+
+      <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'/'</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">part</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">part</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'_'</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">===</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>])
+        <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-node">&quot;#{File.basename(Middleman::Base.views)}/&quot;</span>, <span class="ruby-value str">&quot;&quot;</span>)
+                         .<span class="ruby-identifier">gsub</span>(<span class="ruby-node">&quot;#{File.basename(Middleman::Base.public)}/&quot;</span>, <span class="ruby-value str">&quot;&quot;</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>]) <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;.js&quot;</span>
+          <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">gsub!</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>]), <span class="ruby-value str">&quot;&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>]).<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>).<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000006">
+                    
+                    <a name="M000006"></a><b>destination_root</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000006_source')" id="l_M000006_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/2b085b886ca2cae406ac761dc0f93744ecf20949/lib/middleman/builder.rb#L9" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000006_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/builder.rb, line 9</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destination_root</span>; <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>, <span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">build_dir</span>); <span class="ruby-keyword kw">end</span></pre>
                     </div>
                 </div>
                 

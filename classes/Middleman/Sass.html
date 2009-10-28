@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Middleman::Sass</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            Middleman::Sass 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/middleman/sass_rb.html">lib/middleman/sass.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000064">included</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000065">render_path</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000066">sass_exception_string</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000064">
+                    
+                    <a name="M000064"></a><b>included</b>(base)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000064_source')" id="l_M000064_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/75c5825ec2486953effafb4b6898836f074984ac/lib/middleman/sass.rb#L6" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000064_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/sass.rb, line 6</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+      <span class="ruby-identifier">base</span>.<span class="ruby-identifier">supported_formats</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;sass&quot;</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000065">
+                    
+                    <a name="M000065"></a><b>render_path</b>(path)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000065_source')" id="l_M000065_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/75c5825ec2486953effafb4b6898836f074984ac/lib/middleman/sass.rb#L10" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000065_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/sass.rb, line 10</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_path</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">template_exists?</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">:sass</span>)
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">static_version</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">public</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">path_info</span>
+          <span class="ruby-identifier">send_file</span>(<span class="ruby-identifier">static_version</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span> <span class="ruby-identifier">static_version</span>
+
+          <span class="ruby-identifier">location_of_sass_file</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">environment</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;build&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">build_dir</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">public</span>
+          <span class="ruby-identifier">css_filename</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>, <span class="ruby-identifier">location_of_sass_file</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">path_info</span>
+          <span class="ruby-identifier">sass</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-operator">::</span><span class="ruby-constant">Compass</span>.<span class="ruby-identifier">sass_engine_options</span>.<span class="ruby-identifier">merge</span>({ <span class="ruby-identifier">:css_filename</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">css_filename</span> }))
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+          <span class="ruby-identifier">sass_exception_string</span>(<span class="ruby-identifier">e</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-keyword kw">super</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000066">
+                    
+                    <a name="M000066"></a><b>sass_exception_string</b>(e)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Handle <a href="Sass.html">Sass</a> errors
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000066_source')" id="l_M000066_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/75c5825ec2486953effafb4b6898836f074984ac/lib/middleman/sass.rb#L28" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000066_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/sass.rb, line 28</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sass_exception_string</span>(<span class="ruby-identifier">e</span>)
+      <span class="ruby-identifier">e_string</span> = <span class="ruby-node">&quot;#{e.class}: #{e.message}&quot;</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-operator">::</span><span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">SyntaxError</span>
+        <span class="ruby-identifier">e_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;\non line #{e.sass_line}&quot;</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">sass_filename</span>
+          <span class="ruby-identifier">e_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; of #{e.sass_filename}&quot;</span>
+
+          <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">sass_filename</span>)
+            <span class="ruby-identifier">e_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n\n&quot;</span>
+
+            <span class="ruby-identifier">min</span> = [<span class="ruby-identifier">e</span>.<span class="ruby-identifier">sass_line</span> <span class="ruby-operator">-</span> <span class="ruby-value">5</span>, <span class="ruby-value">0</span>].<span class="ruby-identifier">max</span>
+            <span class="ruby-keyword kw">begin</span>
+              <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">sass_filename</span>).<span class="ruby-identifier">rstrip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\n&quot;</span>)[
+                <span class="ruby-identifier">min</span> <span class="ruby-operator">..</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">sass_line</span> <span class="ruby-operator">+</span> <span class="ruby-value">5</span>
+              ].<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">e_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{min + i + 1}: #{line}\n&quot;</span>
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">rescue</span>
+              <span class="ruby-identifier">e_string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Couldn't read sass file: #{e.sass_filename}&quot;</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-value str">&quot;/*\n\#{e_string}\n\nBacktrace:\\n\#{e.backtrace.join(\&quot;\\n\&quot;)}\n*/\nbody:before {\nwhite-space: pre;\nfont-family: monospace;\ncontent: \&quot;\#{e_string.gsub('\&quot;', '\\\&quot;').gsub(\&quot;\\n\&quot;, '\\\\A ')}\&quot;; }\n&quot;</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

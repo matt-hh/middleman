@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>fastimage.rb</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            fastimage.rb
+        </h1>
+        <ul class="files">
+            <li>lib/middleman/fastimage.rb</li>
+            <li>Last modified: 2009-10-28 10:21:33 -0700</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+FastImage finds the size or type of an image given its uri. It is careful
+to only fetch and parse as much of the image as is needed to determine the
+result. It does this by using a feature of Net::HTTP that yields strings
+from the resource being fetched as soon as the packets arrive.
+</p>
+<p>
+No external libraries such as ImageMagick are used here, this is a very
+lightweight solution to finding image information.
+</p>
+<p>
+FastImage knows about GIF, JPEG, BMP and PNG files.
+</p>
+<p>
+FastImage can also read files from the local filesystem by supplying the
+path instead of a uri. In this case FastImage uses the open-uri library to
+read the file in chunks of 256 bytes until it has enough. This is possibly
+a useful bandwidth-saving feature if the file is on a network attached disk
+rather than truly local.
+</p>
+<h3>Examples</h3>
+<pre>
+  require 'fastimage'
+
+  FastImage.size(&quot;http://stephensykes.com/images/ss.com_x.gif&quot;)
+  =&gt; [266, 56]
+  FastImage.type(&quot;http://stephensykes.com/images/pngimage&quot;)
+  =&gt; :png
+  FastImage.type(&quot;/some/local/file.gif&quot;)
+  =&gt; :gif
+</pre>
+<h3>References</h3>
+<ul>
+<li><a
+href="http://snippets.dzone.com/posts/show/805">snippets.dzone.com/posts/show/805</a>
+
+</li>
+<li><a
+href="http://www.anttikupila.com/flash/getting-jpg-dimensions-with-as3-without-loading-the-entire-file">www.anttikupila.com/flash/getting-jpg-dimensions-with-as3-without-loading-the-entire-file</a>/
+
+</li>
+<li><a
+href="http://pennysmalls.com/2008/08/19/find-jpeg-dimensions-fast-in-ruby">pennysmalls.com/2008/08/19/find-jpeg-dimensions-fast-in-ruby</a>/
+
+</li>
+<li><a href="http://imagesize.rubyforge.org/">imagesize.rubyforge.org/</a>
+
+</li>
+</ul>
+
+    </div>
+    
+
+    
+    <div class="sectiontitle">Required Files</div>
+    <ul>
+        
+        <li>net/https</li>
+        
+        <li>open-uri</li>
+        
+    </ul>
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="../../../classes/Middleman.html">Middleman</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+</html>

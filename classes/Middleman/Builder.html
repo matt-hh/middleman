@@ -31,6 +31,8 @@
             
             <li><a href="../../files/lib/middleman/features/minify_javascript_rb.html">lib/middleman/features/minify_javascript.rb</a></li>
             
+            <li><a href="../../files/lib/middleman/features/smush_pngs_rb.html">lib/middleman/features/smush_pngs.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -50,6 +52,8 @@
         <dt>A</dt>
         <dd>
             <ul>
+                
+                <li><a href="#M000045">after_run</a>,</li>
                 
                 <li><a href="#M000038">after_run</a>,</li>
                 
@@ -88,6 +92,8 @@
         <dt>P</dt>
         <dd>
             <ul>
+                
+                <li><a href="#M000044">pre_smush_after_run</a>,</li>
                 
                 <li><a href="#M000037">pre_yui_after_run</a></li>
                 
@@ -270,6 +276,92 @@ Override template to ask middleman for the correct extension to output
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
+                <div class="title" id="M000012">
+                    
+                    <a name="M000012"></a><b>after_run</b>()
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Builder.html#M000037">pre_yui_after_run</a>
+                    
+                    <a href="Builder.html#M000044">pre_smush_after_run</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000012_source')" id="l_M000012_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/58d6fc94ea9caf604422b8de3d248d002dcd6558/lib/middleman/builder.rb#L43" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000012_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/builder.rb, line 43</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_run</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000045">
+                    
+                    <a name="M000045"></a><b>after_run</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000045_source')" id="l_M000045_source">show</a>
+                        
+                        | <a href="http://github.com/tdreyno/middleman/blob/81a8192d14ba99af991c276f39ca9995e4e5fe83/lib/middleman/features/smush_pngs.rb#L7" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000045_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/middleman/features/smush_pngs.rb, line 7</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_run</span>
+      <span class="ruby-identifier">pre_smush_after_run</span>
+      <span class="ruby-identifier">smush_dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">build_dir</span>, <span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">images_dir</span>)
+      
+      <span class="ruby-comment cmt"># Read cache</span>
+      <span class="ruby-identifier">cache_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">root</span>, <span class="ruby-value str">&quot;.smush-cache&quot;</span>)
+      <span class="ruby-identifier">cache_data</span> = <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">cache_file</span>)
+        <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">restore</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">cache_file</span>))
+      <span class="ruby-keyword kw">else</span>
+        {}
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-operator">::</span><span class="ruby-constant">Smusher</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">images_in_folder</span>(<span class="ruby-identifier">smush_dir</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">original_file_size</span> = <span class="ruby-identifier">size</span>(<span class="ruby-identifier">file</span>)
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">original_file_size</span>.<span class="ruby-identifier">zero?</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">cache_data</span>[<span class="ruby-identifier">file</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">cache_data</span>[<span class="ruby-identifier">file</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">original_file_size</span>
+
+          <span class="ruby-identifier">with_logging</span>(<span class="ruby-identifier">file</span>, <span class="ruby-keyword kw">true</span>) <span class="ruby-keyword kw">do</span>
+            <span class="ruby-identifier">write_optimized_data</span>(<span class="ruby-identifier">file</span>)
+            <span class="ruby-identifier">cache_data</span>[<span class="ruby-identifier">file</span>] = <span class="ruby-identifier">size</span>(<span class="ruby-identifier">file</span>) <span class="ruby-comment cmt"># Add or update cache</span>
+            <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">cache_file</span>, <span class="ruby-value str">&quot;w&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span> <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">cache_data</span>) } <span class="ruby-comment cmt"># Write cache</span>
+            <span class="ruby-identifier">say</span> <span class="ruby-node">&quot;&lt;%= color('#{&quot;[SMUSHED]&quot;.rjust(12)}', :yellow) %&gt;  &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">build_dir</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;/&quot;</span>, <span class="ruby-value str">''</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
                 <div class="title" id="M000038">
                     
                     <a name="M000038"></a><b>after_run</b>()
@@ -307,39 +399,6 @@ Override template to ask middleman for the correct extension to output
             </div>
             
             <div class="method">
-                <div class="title" id="M000012">
-                    
-                    <a name="M000012"></a><b>after_run</b>()
-                    
-                </div>
-                
-                
-                <div class="aka">
-                    This method is also aliased as
-                    
-                    <a href="Builder.html#M000037">pre_yui_after_run</a>
-                    
-                </div>
-                
-                
-                
-                <div class="sourcecode">
-                    <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000012_source')" id="l_M000012_source">show</a>
-                        
-                        | <a href="http://github.com/tdreyno/middleman/blob/58d6fc94ea9caf604422b8de3d248d002dcd6558/lib/middleman/builder.rb#L43" target="_blank" class="github_url">on GitHub</a>
-                        
-                    </p>
-                    <div id="M000012_source" class="dyn-source">
-                        <pre><span class="ruby-comment cmt"># File lib/middleman/builder.rb, line 43</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_run</span>
-    <span class="ruby-keyword kw">end</span></pre>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="method">
                 <div class="title" id="M000008">
                     
                     <a name="M000008"></a><b>destination_root</b>()
@@ -361,6 +420,24 @@ Override template to ask middleman for the correct extension to output
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destination_root</span>; <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>, <span class="ruby-constant">Middleman</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">build_dir</span>); <span class="ruby-keyword kw">end</span></pre>
                     </div>
                 </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000044">
+                    
+                    <a name="M000044"></a><b>pre_smush_after_run</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Builder.html#M000012">after_run</a>
+</p>
+
+                </div>
+                
+                
                 
             </div>
             

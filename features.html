@@ -51,22 +51,40 @@
         <div class="octowrap">
           <a class="octothorpe" href="#section-1">#</a>
         </div>
-        
+        <p> Middleman provides an extension API which allows you to hook into the
+ lifecycle of a page request, or static build, and manipulate the output.
+ Internal to Middleman, these extensions are called &ldquo;features,&rdquo; but we use
+ the exact same API as is made available to the public.</p>
+
+<p> A Middleman extension looks like this:</p>
+
+<pre><code> module MyExtension
+   class &lt;&lt; self
+     def registered(app)
+       # My Code
+     end
+   end
+ end
+</code></pre>
+
+<p> In your <code>config.rb</code>, you must load your extension (if it is not defined in
+ that file) and call <code>activate</code>.</p>
+
+<pre><code> require "my_extension"
+ activate MyExtension
+</code></pre>
+
+<p> This will call the <code>registered</code> method in your extension and provide you
+ with the <code>app</code> parameter which is a Middleman::Server context. From here
+ you can choose to respond to requests for certain paths or simply attach
+ Rack middleware to the stack.</p>
+
+<p> The built-in features cover a wide range of functions. Some provide helper
+ methods to use in your views. Some modify the output on-the-fly. And some
+ apply computationally-intensive changes to your final build files.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="k">module</span> <span class="nn">Middleman::Features</span>
-  <span class="nb">autoload</span> <span class="ss">:RelativeAssets</span><span class="p">,</span>      <span class="s2">&quot;middleman/features/relative_assets&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:AssetHost</span><span class="p">,</span>           <span class="s2">&quot;middleman/features/asset_host&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:CacheBuster</span><span class="p">,</span>         <span class="s2">&quot;middleman/features/cache_buster&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:DefaultHelpers</span><span class="p">,</span>      <span class="s2">&quot;middleman/features/default_helpers&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:AutomaticImageSizes</span><span class="p">,</span> <span class="s2">&quot;middleman/features/automatic_image_sizes&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:UglyHaml</span><span class="p">,</span>            <span class="s2">&quot;middleman/features/ugly_haml&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:MinifyCss</span><span class="p">,</span>           <span class="s2">&quot;middleman/features/minify_css&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:MinifyJavascript</span><span class="p">,</span>    <span class="s2">&quot;middleman/features/minify_javascript&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:Slickmap</span><span class="p">,</span>            <span class="s2">&quot;middleman/features/slickmap&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:SmushPngs</span><span class="p">,</span>           <span class="s2">&quot;middleman/features/smush_pngs&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:CodeRay</span><span class="p">,</span>             <span class="s2">&quot;middleman/features/code_ray&quot;</span>
-  <span class="nb">autoload</span> <span class="ss">:Lorem</span><span class="p">,</span>               <span class="s2">&quot;middleman/features/lorem&quot;</span></pre></div>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">Middleman::Features</span></pre></div>
       </td>
     </tr>
     <tr id='section-2'>
@@ -74,27 +92,209 @@
         <div class="octowrap">
           <a class="octothorpe" href="#section-2">#</a>
         </div>
-        <p> autoload :LiveReload,          &ldquo;middleman/features/live_reload&rdquo;</p>
-
+        <p> RelativeAssets allow any asset path in dynamic templates to be either
+ relative to the root of the project or use an absolute URL.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>  
-  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:RelativeAssets</span><span class="p">,</span>      <span class="s2">&quot;middleman/features/relative_assets&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-3">#</a>
+        </div>
+        <p> AssetHost allows you to setup multiple domains to host your static assets.
+ Calls to asset paths in dynamic templates will then rotate through each of
+ the asset servers to better spread the load.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:AssetHost</span><span class="p">,</span>           <span class="s2">&quot;middleman/features/asset_host&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-4">#</a>
+        </div>
+        <p> CacheBuster adds a query string to assets in dynamic templates to avoid
+ browser caches failing to update to your new content.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:CacheBuster</span><span class="p">,</span>         <span class="s2">&quot;middleman/features/cache_buster&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-5">#</a>
+        </div>
+        <p> DefaultHelpers are the built-in dynamic template helpers.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:DefaultHelpers</span><span class="p">,</span>      <span class="s2">&quot;middleman/features/default_helpers&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-6'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-6">#</a>
+        </div>
+        <p> AutomaticImageSizes inspects the images used in your dynamic templates and
+ automatically adds width and height attributes to their HTML elements.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:AutomaticImageSizes</span><span class="p">,</span> <span class="s2">&quot;middleman/features/automatic_image_sizes&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-7'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-7">#</a>
+        </div>
+        <p> UglyHaml enables the non-indented output format from Haml templates. Useful
+ for somewhat obfuscating the output and hiding the fact that you&rsquo;re using Haml.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:UglyHaml</span><span class="p">,</span>            <span class="s2">&quot;middleman/features/ugly_haml&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-8'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-8">#</a>
+        </div>
+        <p> MinifyCss uses the YUI compressor to shrink CSS files</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:MinifyCss</span><span class="p">,</span>           <span class="s2">&quot;middleman/features/minify_css&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-9">#</a>
+        </div>
+        <p> MinifyJavascript uses the YUI compressor to shrink JS files</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:MinifyJavascript</span><span class="p">,</span>    <span class="s2">&quot;middleman/features/minify_javascript&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-10'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-10">#</a>
+        </div>
+        <p> Slickmap (http://astuteo.com/slickmap/) is a beautiful sitemap tool which
+ will attempt to generate a <code>sitemap.html</code> file from your project.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:Slickmap</span><span class="p">,</span>            <span class="s2">&quot;middleman/features/slickmap&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-11'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-11">#</a>
+        </div>
+        <p> SmushPngs uses Yahoo&rsquo;s Smush.it API to compresses PNGs and JPGs. Often times
+ the service can decrease the size of Photoshop-exported images by 30-50%</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:SmushPngs</span><span class="p">,</span>           <span class="s2">&quot;middleman/features/smush_pngs&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-12'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-12">#</a>
+        </div>
+        <p> CodeRay is a syntax highlighter.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:CodeRay</span><span class="p">,</span>             <span class="s2">&quot;middleman/features/code_ray&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-13'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-13">#</a>
+        </div>
+        <p> Lorem provides a handful of helpful prototyping methods to generate words,
+ paragraphs, fake images, names and email addresses.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="nb">autoload</span> <span class="ss">:Lorem</span><span class="p">,</span>               <span class="s2">&quot;middleman/features/lorem&quot;</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-14'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-14">#</a>
+        </div>
+        <p> The Feature API is itself a Feature. Mind blowing!</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
     <span class="k">def</span> <span class="nf">registered</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
       <span class="n">app</span><span class="o">.</span><span class="n">extend</span> <span class="no">ClassMethods</span>
     <span class="k">end</span>
     <span class="k">alias</span> <span class="ss">:included</span> <span class="ss">:registered</span>
   <span class="k">end</span>
   
-  <span class="k">module</span> <span class="nn">ClassMethods</span>
-    <span class="k">def</span> <span class="nf">activate</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
-      <span class="n">mod_name</span> <span class="o">=</span> <span class="n">feature_name</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">camelize</span>
-      <span class="k">if</span> <span class="no">Middleman</span><span class="o">::</span><span class="no">Features</span><span class="o">.</span><span class="n">const_defined?</span><span class="p">(</span><span class="n">mod_name</span><span class="p">)</span>
-        <span class="n">register</span> <span class="no">Middleman</span><span class="o">::</span><span class="no">Features</span><span class="o">.</span><span class="n">const_get</span><span class="p">(</span><span class="n">mod_name</span><span class="p">)</span>
-      <span class="k">end</span>
-    <span class="k">end</span>
+  <span class="k">module</span> <span class="nn">ClassMethods</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-15'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-15">#</a>
+        </div>
+        <p> This method is available in the project&rsquo;s <code>config.rb</code>.
+ It takes a underscore-separated symbol, finds the appropriate
+ feature module and includes it.</p>
+
+<pre><code> activate :lorem
+</code></pre>
+
+<p> Alternatively, you can pass in a Middleman feature module directly.</p>
+
+<pre><code> activate MyFeatureModule
+</code></pre>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">activate</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+      <span class="n">feature_name</span> <span class="o">=</span> <span class="n">feature_name</span><span class="o">.</span><span class="n">to_s</span> <span class="k">if</span> <span class="n">feature_name</span><span class="o">.</span><span class="n">class</span> <span class="o">==</span> <span class="no">Symbol</span>
+      <span class="n">feature_name</span> <span class="o">=</span> <span class="no">Middleman</span><span class="o">::</span><span class="no">Features</span><span class="o">.</span><span class="n">const_get</span><span class="p">(</span><span class="n">feature_name</span><span class="o">.</span><span class="n">camelize</span><span class="p">)</span> <span class="k">if</span> <span class="n">feature_name</span><span class="o">.</span><span class="n">class</span> <span class="o">==</span> <span class="nb">String</span> <span class="k">if</span> <span class="no">Middleman</span><span class="o">::</span><span class="no">Features</span><span class="o">.</span><span class="n">const_defined?</span><span class="p">(</span><span class="n">mod_name</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">enable</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+      <span class="n">register</span> <span class="n">feature_name</span>
+    <span class="k">end</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-16'>
+      <td class=docs>
+        <div class="octowrap">
+          <a class="octothorpe" href="#section-16">#</a>
+        </div>
+        <p> Deprecated API. Please use <code>activate</code> instead.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">enable</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
       <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;Warning: Feature activation has been renamed from enable to activate&quot;</span>
       <span class="n">activate</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
       <span class="k">super</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>

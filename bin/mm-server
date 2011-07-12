@@ -34,14 +34,14 @@ ENV['RACK_ENV'] = env
 
 while (!@found_root && (@path_parts.length > 0))
   @current_path = File.join(*@path_parts)
-  
+
   source_folder = File.join(@current_path, "source")
-  
+
   if File.exists?(source_folder)
     @found_root = true
     next
   end
-  
+
   @path_parts.pop
 end
 
@@ -69,5 +69,55 @@ Middleman::Server.root = @current_path
 options[:app]    = Middleman::Server.new
 # options[:server] = 'webrick'
 
-puts "== The Middleman is standing watch on port #{options[:Port]}"
-Rack::Server.new(options).start
+# puts "== The Middleman is standing watch on port #{options[:Port]}"
+# Rack::Server.new(options).start
+
+
+
+if Gem.available?('guard')
+  require 'guard'
+  puts "== The Middleman is starting with guard support"
+
+  require 'guard/guard'
+  module ::Guard
+    class MiddlemanServerGuard < ::Guard::Guard
+      def start
+        server_start
+      end
+      def run_on_change(paths)
+        server_stop
+        server_start
+      end
+      private
+        def server_start
+          puts "== The Middleman is standing watch on port #{options[:Port]}"
+          @server_options = { :Port => 4567, :AccessLog => [] }
+          @server_job = fork do
+            @server_options[:app] = Middleman::Server.new
+            Rack::Server.new(@server_options).start
+          end
+        end
+        def server_stop
+          puts "== The Middleman is going to shutdown"
+          Process.kill("KILL", @server_job)
+          Process.wait @server_job
+          @server_job = nil
+          @server_options[:app] = nil
+        end
+    end
+  end
+
+  guardfile = File.join(@current_path, "Guardfile")
+  guardfile_contents = File.exists?(guardfile) ? File.open(guardfile, "r").read : ""
+
+  inline_guardfile_contents = "guard 'MiddlemanServerGuard' do watch(%r{config\.rb}) end"
+
+  guard_options = {
+    :guardfile_contents => inline_guardfile_contents << guardfile_contents
+  }
+  Guard.start(guard_options)
+
+else
+  puts "== The Middleman is standing watch on port #{options[:Port]}"
+  Rack::Server.new(options).start
+end

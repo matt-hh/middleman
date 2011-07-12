@@ -90,6 +90,7 @@ if Gem.available?('guard')
       end
       private
         def server_start
+          require File.join(File.dirname(__FILE__), '..', 'lib', 'middleman')
           puts "== The Middleman is standing watch on port #{options[:Port]}"
           @server_options = { :Port => 4567, :AccessLog => [] }
           @server_job = fork do
